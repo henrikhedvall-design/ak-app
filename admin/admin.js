@@ -85,17 +85,20 @@
           <div class="login-card">
             <div class="logo"><span class="sticker">Åk!</span><span class="logo-text">Admin</span></div>
             <p>Logga in för att granska rekord och rapporter.</p>
-            <input class="field" id="email" type="email" autocomplete="username" placeholder="E-postadress" value="${esc(email)}">
-            <input class="field" id="password" type="password" autocomplete="current-password" placeholder="Lösenord">
-            <button class="btn btn-lime btn-block" id="send">Logga in</button>
+            <form id="login-form" class="login-form" method="post" action="#" autocomplete="on">
+              <input class="field" id="email" name="email" type="email" inputmode="email" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="E-postadress" aria-label="E-postadress" required value="${esc(email)}">
+              <input class="field" id="password" name="password" type="password" autocomplete="current-password" placeholder="Lösenord" aria-label="Lösenord" required>
+              <button class="btn btn-lime btn-block" id="send" type="submit">Logga in</button>
+            </form>
             ${message ? `<p class="error">${esc(message)}</p>` : ""}
             <p class="small">Bara godkända admins kommer in. Admins läggs till i Supabase under Authentication > Users.</p>
           </div>
         </div>`;
       const input = document.getElementById("email");
       const pw = document.getElementById("password");
-      (email ? pw : input).focus();
-      const send = async () => {
+      if (email) pw.focus();
+      const send = async (e) => {
+        if (e) e.preventDefault();
         email = input.value.trim();
         if (demo) return start();
         if (!email || !pw.value) return;
@@ -104,9 +107,8 @@
         if (error) { message = "Fel e-postadress eller lösenord."; draw(); return; }
         start();
       };
-      document.getElementById("send").onclick = send;
-      input.onkeydown = (e) => { if (e.key === "Enter") pw.focus(); };
-      pw.onkeydown = (e) => { if (e.key === "Enter") send(); };
+      // Ett riktigt formulär med submit gör att lösenordshanteraren kan fylla i och erbjuda att spara.
+      document.getElementById("login-form").addEventListener("submit", send);
     };
     draw();
   }

@@ -57,6 +57,7 @@ a { color: var(--glacier); text-decoration: none; }
   display: flex; flex-direction: column; align-items: stretch; gap: 16px; text-align: center;
 }
 .login-card .logo { justify-content: center; }
+.login-form { display: flex; flex-direction: column; gap: 16px; }
 .login-card .logo-text { color: var(--ink); }
 .login-card p { margin: 0; color: var(--ink-muted); line-height: 1.45; }
 .login-card .small { font-size: 12px; }
@@ -68,7 +69,7 @@ a { color: var(--glacier); text-decoration: none; }
 }
 .field:focus { border-color: var(--glacier); background: var(--surface); }
 .code-field { letter-spacing: 8px; text-align: center; font-weight: 700; font-size: 20px; }
-.error { color: var(--rejected); font-weight: 600; }
+.error, .login-card .error { color: var(--rejected); font-weight: 600; }
 
 /* MARK: Knappar */
 .btn {
