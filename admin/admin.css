@@ -111,6 +111,8 @@ a { color: var(--glacier); text-decoration: none; }
   margin-top: auto; background: var(--night-card); border-radius: 14px; padding: 10px 12px;
   display: flex; align-items: center; gap: 10px;
 }
+.me-toggle { border: 0; padding: 0; background: none; cursor: default; display: flex; }
+.me-menu { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; }
 .me .who { flex: 1; min-width: 0; line-height: 1.25; }
 .me .who div:first-child { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .me .who div:last-child { font-size: 12px; color: rgba(255, 255, 255, 0.6); }
@@ -313,12 +315,51 @@ tr.clickable:hover td { background: #FAFBFE; }
   .user-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 760px) {
-  .shell { grid-template-columns: 1fr; background: var(--bg); }
-  .sidebar { position: static; height: auto; flex-direction: row; align-items: center; flex-wrap: wrap; padding: 12px 16px; gap: 12px; }
-  .nav { flex-direction: row; }
-  .me { margin: 0 0 0 auto; }
-  .main { padding: 20px 16px 40px; }
-  h1.page, .case-head h1 { font-size: 32px; }
+  .shell { grid-template-columns: 1fr; grid-template-rows: auto 1fr; min-height: 100dvh; background: var(--bg); }
+  .sidebar {
+    position: sticky; top: 0; z-index: 1000; height: auto; flex-direction: row; align-items: center; flex-wrap: nowrap;
+    padding: 10px 12px; padding-top: calc(10px + env(safe-area-inset-top)); gap: 10px;
+  }
+  .sidebar .logo { padding: 0; }
+  .sidebar .logo-text { display: none; }
+  .sidebar .sticker { font-size: 15px; padding: 3px 8px; }
+  .nav { flex-direction: row; gap: 2px; flex: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a { padding: 6px 10px; font-size: 14px; gap: 6px; white-space: nowrap; border-radius: 10px; }
+  .nav .count { font-size: 11px; padding: 0 7px; }
+  .me { position: relative; margin: 0; padding: 0; background: none; flex: none; }
+  .me-toggle { cursor: pointer; }
+  .me .avatar { width: 32px; height: 32px; font-size: 13px; }
+  .me-menu {
+    display: none; position: absolute; right: 0; top: calc(100% + 8px); background: var(--night-card); border-radius: 14px;
+    padding: 12px; min-width: 200px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  }
+  .me.open .me-menu { display: flex; }
+  .main { padding: 16px 16px 40px; }
+  h1.page, .case-head h1 { font-size: 28px; }
+  .chips { gap: 6px; }
+  .chip { font-size: 14px; height: 34px; padding: 0 12px; }
+  /* Tabellerna blir kort, en per rad */
+  table.stack thead { display: none; }
+  table.stack, table.stack tbody { display: block; }
+  table.stack tr { display: grid; grid-template-columns: 1fr auto; gap: 8px 12px; align-items: center; padding: 14px 16px; border-top: 1px solid var(--line); }
+  table.stack tr:first-child { border-top: 0; }
+  table.stack td { padding: 0; border: 0; }
+  table.stack .signal { max-width: none; }
+  .queue-table td:nth-child(2) { grid-area: 1 / 1; }
+  .queue-table td:nth-child(6) { grid-area: 1 / 2; text-align: right; font-size: 13px; }
+  .queue-table td:nth-child(3) { grid-area: 2 / 1; }
+  .queue-table td:nth-child(1) { grid-area: 2 / 2; justify-self: end; }
+  .queue-table td:nth-child(4) { grid-area: 3 / 1 / 4 / 3; font-size: 14px; }
+  .queue-table td:nth-child(5) { grid-area: 4 / 1; }
+  .queue-table td:nth-child(7) { grid-area: 4 / 2; }
+  .queue-table .value { display: inline; margin-right: 6px; }
+  .queue-table .board { display: inline; }
+  .users-table td:nth-child(1) { grid-area: 1 / 1; min-width: 0; }
+  .users-table td:nth-child(6) { grid-area: 1 / 2; }
+  .users-table td:nth-child(5) { grid-area: 2 / 1; font-size: 13px; }
+  .users-table td:nth-child(5)::before { content: "Senast aktiv "; }
+  .users-table td:nth-child(2), .users-table td:nth-child(3), .users-table td:nth-child(4), .users-table td:nth-child(7) { display: none; }
   .case-grid, .pb-grid { grid-template-columns: 1fr; }
   .case-grid .span2 { grid-column: auto; }
   .profile-card { flex-wrap: wrap; }

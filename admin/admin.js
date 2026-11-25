@@ -144,15 +144,20 @@
             <a href="#/" class="${active === "queue" ? "on" : ""}">Granskningskö <span class="count">${me.queue ?? 0}</span></a>
             <a href="#/anvandare" class="${active === "users" ? "on" : ""}">Användare</a>
           </nav>
-          <div class="me">
-            ${avatar(me.name, null, "lime")}
-            <div class="who"><div>${esc(me.name || "")}</div><div>Admin</div></div>
-            <button class="btn" id="signout">Logga ut</button>
+          <div class="me" id="me">
+            <button class="me-toggle" id="me-toggle" aria-label="Konto">${avatar(me.name, null, "lime")}</button>
+            <div class="me-menu">
+              <div class="who"><div>${esc(me.name || "")}</div><div>Admin</div></div>
+              <button class="btn" id="signout">Logga ut</button>
+            </div>
           </div>
         </aside>
         <main class="main">${demo ? '<div class="demo-banner">Exempeldata. Fyll i adressen och nyckeln i <b>admin/config.js</b> för att koppla adminsidan till servern.</div>' : ""}${content}</main>
       </div>`;
     document.getElementById("signout").onclick = signOut;
+    const meBox = document.getElementById("me");
+    document.getElementById("me-toggle").onclick = (e) => { e.stopPropagation(); meBox.classList.toggle("open"); };
+    document.addEventListener("click", (e) => { if (!meBox.contains(e.target)) meBox.classList.remove("open"); });
   }
 
   function loading(active) { shell(active, '<div class="loading">Hämtar …</div>'); }
@@ -183,7 +188,7 @@
       <div class="chips">${chip("all", "Alla", rows.length)}${chip("record", "Rekord", records.length)}${chip("report", "Rapporterat", reports.length)}</div>
       <div class="table-card"><div class="table-wrap">
         ${shown.length === 0 ? '<div class="empty">Tomt här. Bra jobbat!</div>' : `
-        <table>
+        <table class="stack queue-table">
           <thead><tr><th>Typ</th><th>Användare</th><th>Värde</th><th>Signal</th><th>Status</th><th>Väntat</th><th></th></tr></thead>
           <tbody>${shown.map((r) => `
             <tr class="clickable" data-key="${esc(r.key)}">
@@ -552,7 +557,7 @@
         <div class="chips">${chip("all", "Alla", all.length)}${chip("suspended", "Avstängda", susp.length)}</div></div>
       <div class="table-card"><div class="table-wrap">
         ${shown.length === 0 ? '<div class="empty">Ingen användare matchar.</div>' : `
-        <table>
+        <table class="stack users-table">
           <thead><tr><th>Användare</th><th>Inloggning</th><th>Ålder</th><th>Skiddagar</th><th>Senast aktiv</th><th>Status</th><th></th></tr></thead>
           <tbody>${shown.map((u) => `
             <tr class="clickable" data-id="${esc(u.id)}">
