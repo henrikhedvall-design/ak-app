@@ -320,9 +320,10 @@ tr.clickable:hover td { background: #FAFBFE; }
 @media (max-width: 760px) {
   .shell { grid-template-columns: 1fr; grid-template-rows: auto 1fr; min-height: 100dvh; background: var(--bg); }
   .sidebar {
-    /* Inte sticky: iOS lägger en suddig toning över fasta element högst upp i hemskärmsappen. */
-    position: relative; z-index: 1000; height: auto; flex-direction: row; align-items: center; flex-wrap: nowrap;
-    padding: 12px 12px 12px; padding-top: calc(24px + env(safe-area-inset-top)); gap: 10px;
+    /* iOS 26 lägger alltid en mjuk oskärpa strax under klockan i hemskärmsappar. Toppraden har därför
+       extra mörkblå luft ovanför sig, så att loggan och flikarna ligger nedanför oskärpan. */
+    position: sticky; top: 0; z-index: 1000; height: auto; flex-direction: row; align-items: center; flex-wrap: nowrap;
+    padding: 12px; padding-top: calc(36px + env(safe-area-inset-top)); gap: 10px;
   }
   .sidebar .logo { padding: 0; }
   .sidebar .logo-text { display: none; }
@@ -340,12 +341,7 @@ tr.clickable:hover td { background: #FAFBFE; }
   }
   .me.open .me-menu { display: flex; }
   .main { padding: 16px max(16px, env(safe-area-inset-right)) calc(40px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); }
-  /* Själva sidan scrollar inte, bara innehållet under toppraden. Då glider inget in under statusraden,
-     och iOS lägger ingen suddig toning över toppen i hemskärmsappen. */
-  html, body { height: 100%; overflow: hidden; }
-  .shell { height: 100dvh; min-height: 0; }
-  .main { overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; min-height: 0; }
-  .login-page { height: 100dvh; overflow-y: auto; }
+  html, body { overflow-x: clip; }
   /* iOS zoomar in när man trycker i ett fält med text under 16 px, och zoomen ligger kvar efter inloggningen. */
   input, textarea, select, .field, .search { font-size: 16px; }
   h1.page, .case-head h1 { font-size: 28px; }
