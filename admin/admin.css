@@ -323,7 +323,7 @@ tr.clickable:hover td { background: #FAFBFE; }
     /* iOS 26 lägger alltid en mjuk oskärpa strax under klockan i hemskärmsappar. Toppraden har därför
        extra mörkblå luft ovanför sig, så att loggan och flikarna ligger nedanför oskärpan. */
     position: sticky; top: 0; z-index: 1000; height: auto; flex-direction: row; align-items: center; flex-wrap: nowrap;
-    padding: 12px; padding-top: calc(36px + env(safe-area-inset-top)); gap: 10px;
+    padding: 14px 12px; padding-top: calc(52px + env(safe-area-inset-top)); gap: 10px;
   }
   .sidebar .logo { padding: 0; }
   .sidebar .logo-text { display: none; }
