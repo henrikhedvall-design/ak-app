@@ -36,6 +36,7 @@ body {
 }
 button { font: inherit; color: inherit; cursor: pointer; }
 input, textarea { font: inherit; color: inherit; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 a { color: var(--glacier); text-decoration: none; }
 
 .display { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; letter-spacing: -0.03em; }
@@ -335,7 +336,10 @@ tr.clickable:hover td { background: #FAFBFE; }
     padding: 12px; min-width: 200px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
   }
   .me.open .me-menu { display: flex; }
-  .main { padding: 16px 16px 40px; }
+  .main { padding: 16px max(16px, env(safe-area-inset-right)) calc(40px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); }
+  html, body { overflow-x: hidden; }
+  /* iOS zoomar in när man trycker i ett fält med text under 16 px, och zoomen ligger kvar efter inloggningen. */
+  input, textarea, select, .field, .search { font-size: 16px; }
   h1.page, .case-head h1 { font-size: 28px; }
   .chips { gap: 6px; }
   .chip { font-size: 14px; height: 34px; padding: 0 12px; }
