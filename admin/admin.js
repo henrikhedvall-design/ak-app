@@ -105,7 +105,9 @@
         document.getElementById("send").disabled = true;
         const { error } = await sb.auth.signInWithPassword({ email, password: pw.value });
         if (error) { message = "Fel e-postadress eller lösenord."; draw(); return; }
-        start();
+        // Ladda om sidan efter lyckad inloggning (sessionen ligger kvar). Safari erbjuder att spara
+        // lösenordet när formuläret skickas och sidan byts, inte när bara innehållet ritas om.
+        location.replace(location.pathname + location.hash);
       };
       // Ett riktigt formulär med submit gör att lösenordshanteraren kan fylla i och erbjuda att spara.
       document.getElementById("login-form").addEventListener("submit", send);
