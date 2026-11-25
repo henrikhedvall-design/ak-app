@@ -320,7 +320,8 @@ tr.clickable:hover td { background: #FAFBFE; }
 @media (max-width: 760px) {
   .shell { grid-template-columns: 1fr; grid-template-rows: auto 1fr; min-height: 100dvh; background: var(--bg); }
   .sidebar {
-    position: sticky; top: 0; z-index: 1000; height: auto; flex-direction: row; align-items: center; flex-wrap: nowrap;
+    /* Inte sticky: iOS lägger en suddig toning över fasta element högst upp i hemskärmsappen. */
+    position: relative; z-index: 1000; height: auto; flex-direction: row; align-items: center; flex-wrap: nowrap;
     padding: 10px 12px; padding-top: calc(10px + env(safe-area-inset-top)); gap: 10px;
   }
   .sidebar .logo { padding: 0; }
