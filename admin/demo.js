@@ -9,14 +9,14 @@
   }
 
   const rows = [
-    { type: "record", key: "e/1", case_no: 1042, user_id: "u1", name: "Oskar Berg", value: "1,8 s", category: "jump", board: "Lufttid", signal: "Ny 1:a i Åre den här veckan", place: "Åre", time: today(18, 2), status: "under_review", since: ago(12) },
-    { type: "record", key: "e/2", case_no: 1041, user_id: "u2", name: "Leo Sund", value: "142 km/h", category: "speed", board: "Snabbast", signal: "Fuskkontrollen misstänker bil: över 120 km/h", place: "Sälen", time: today(17, 47), status: "stopped", since: ago(25) },
+    { type: "record", key: "e/1", case_no: 1042, user_id: "u1", name: "Oskar Berg", value: "1,84 s", category: "jump", board: "Lufttid", signal: "Ny 1:a i Åre den här veckan", place: "Åre", time: today(18, 2), status: "under_review", since: ago(12) },
+    { type: "record", key: "e/2", case_no: 1041, user_id: "u2", name: "Leo Sund", value: "142,4 km/h", category: "speed", board: "Snabbast", signal: "Fuskkontrollen misstänker bil: över 120 km/h", place: "Sälen", time: today(17, 47), status: "stopped", since: ago(25) },
     { type: "report", key: "r/media/m3", case_no: 1040, user_id: "u3", name: "Maja Ek", value: "Video", category: "rotation", board: "Mest rotation", signal: "3 rapporter: olämpligt innehåll", place: "Åre", time: today(17, 30), status: "hidden", since: ago(42) },
     { type: "report", key: "r/media/m4", case_no: 1039, user_id: "u4", name: "Ida Norén", value: "Foto", category: "jump", board: "Lufttid", signal: "Bildfiltret: möjlig nakenhet, 82 %", place: "Vemdalen", time: today(17, 5), status: "hidden", since: ago(60) },
     { type: "record", key: "e/5", case_no: 1038, user_id: "u5", name: "Elsa Holm", value: "1080°", category: "rotation", board: "Mest rotation", signal: "PB +360° på en dag", place: "Åre", time: today(16, 51), status: "under_review", since: ago(70) },
-    { type: "record", key: "e/6", case_no: 1037, user_id: "u5", name: "Elsa Holm", value: "94 km/h", category: "speed", board: "Snabbast", signal: "Ny 1:a i Åre den här veckan", place: "Åre", time: today(16, 20), status: "under_review", since: ago(120) },
+    { type: "record", key: "e/6", case_no: 1037, user_id: "u5", name: "Elsa Holm", value: "94,8 km/h", category: "speed", board: "Snabbast", signal: "Ny 1:a i Åre den här veckan", place: "Åre", time: today(16, 20), status: "under_review", since: ago(120) },
     { type: "report", key: "r/avatar/u7", case_no: 1036, user_id: "u7", name: "Kalle Persson", value: "Profilbild", category: null, board: null, signal: "1 rapport: stötande bild", place: "Sälen", time: today(15, 58), status: "visible", since: ago(130) },
-    { type: "record", key: "e/8", case_no: 1035, user_id: "u8", name: "Nils Åberg", value: "6,2 s", category: "jump", board: "Lufttid", signal: "Fuskkontrollen: lufttid utan höjdskillnad", place: "Hemavan", time: today(15, 12), status: "stopped", since: ago(180) },
+    { type: "record", key: "e/8", case_no: 1035, user_id: "u8", name: "Nils Åberg", value: "6,26 s", category: "jump", board: "Lufttid", signal: "Fuskkontrollen: lufttid utan höjdskillnad", place: "Hemavan", time: today(15, 12), status: "stopped", since: ago(180) },
   ];
 
   const users = [
@@ -32,7 +32,7 @@
   function caseFor(key) {
     const row = rows.find((r) => r.key === key) || rows[0];
     const isReport = row.type === "report";
-    const shown = isReport ? { jump: "1,2 s", speed: "84 km/h", rotation: "540°" }[row.category] : row.value;
+    const shown = isReport ? { jump: "1,26 s", speed: "84,8 km/h", rotation: "540°" }[row.category] : row.value;
     const event = row.category ? {
       id: "e-" + row.case_no, case_no: row.case_no, category: row.category, board: row.board,
       title: { jump: "Lufttid", speed: "Toppfart", rotation: "Rotation" }[row.category] + " " + shown,
@@ -48,7 +48,7 @@
       ],
       checks_summary: row.status === "stopped" ? "Fuskkontroll: 3 av 5 ok." : "Fuskkontroll: 4 av 5 ok.",
       resort_name: row.place, track,
-      previous_first: { name: "Ebba Lund", value_text: "1,6 s" }, previous_pb: "1,1 s",
+      previous_first: { name: "Ebba Lund", value_text: "1,68 s" }, previous_pb: "1,13 s",
     } : null;
     return {
       report: isReport ? { kind: row.key.split("/")[1], target: row.key.split("/")[2], case_no: row.case_no, user_id: row.user_id,
@@ -65,19 +65,19 @@
     return {
       ...u, home_town: "Åre", created_at: "2026-11-03T10:00:00Z", suspended_reason: null,
       bests: {
-        speed: { id: "s1", value: 92, value_text: "92 km/h", status: "approved", resort_name: "Åre", time: d(2) },
-        jump: { id: "j1", value: 1.8, value_text: "1,8 s", status: "under_review", airtime: 1.8, jump_drop: 3.2, resort_name: "Åre", time: d(2) },
+        speed: { id: "s1", value: 92, value_text: "92,4 km/h", status: "approved", resort_name: "Åre", time: d(2) },
+        jump: { id: "j1", value: 1.8, value_text: "1,84 s", status: "under_review", airtime: 1.8, jump_drop: 3.2, resort_name: "Åre", time: d(2) },
         rotation: { id: "r1", value: 720, value_text: "volt + 180", status: "approved", resort_name: "Åre", time: d(2) },
       },
       days: [
-        { id: "d1", date: d(2), resort_name: "Åre", speed: { id: "s1", text: "92 km/h", status: "approved" }, jump: { id: "j1", text: "1,8 s", status: "under_review" }, rotation: { id: "r1", text: "720°", status: "approved" }, media: 3, status: "under_review" },
-        { id: "d2", date: d(3), resort_name: "Åre", speed: { id: "s2", text: "79 km/h", status: "approved" }, jump: { id: "j2", text: "0,9 s", status: "approved" }, rotation: { id: "r2", text: "360°", status: "approved" }, media: 1, status: "approved" },
-        { id: "d3", date: d(5), resort_name: "Storulvån", speed: { id: "s3", text: "64 km/h", status: "approved" }, jump: { id: "j3", text: "1,1 s", status: "approved" }, rotation: null, media: 0, status: "approved" },
-        { id: "d4", date: d(12), resort_name: "Åre", speed: { id: "s4", text: "131 km/h", status: "rejected" }, jump: null, rotation: null, media: 0, status: "rejected" },
+        { id: "d1", date: d(2), resort_name: "Åre", speed: { id: "s1", text: "92,4 km/h", status: "approved" }, jump: { id: "j1", text: "1,84 s", status: "under_review" }, rotation: { id: "r1", text: "720°", status: "approved" }, media: 3, status: "under_review" },
+        { id: "d2", date: d(3), resort_name: "Åre", speed: { id: "s2", text: "79,3 km/h", status: "approved" }, jump: { id: "j2", text: "0,97 s", status: "approved" }, rotation: { id: "r2", text: "360°", status: "approved" }, media: 1, status: "approved" },
+        { id: "d3", date: d(5), resort_name: "Storulvån", speed: { id: "s3", text: "64,8 km/h", status: "approved" }, jump: { id: "j3", text: "1,13 s", status: "approved" }, rotation: null, media: 0, status: "approved" },
+        { id: "d4", date: d(12), resort_name: "Åre", speed: { id: "s4", text: "131,7 km/h", status: "rejected" }, jump: null, rotation: null, media: 0, status: "rejected" },
       ],
       moderation: { rejected: 1, reports_against: 2, reports_made: 1 },
       history: [
-        { kind: "decision", text: "Avvisad: Snabbast 131 km/h. Fart i liften, inte i backen. Av Henrik H.", at: d(12) },
+        { kind: "decision", text: "Avvisad: Snabbast 131,7 km/h. Fart i liften, inte i backen. Av Henrik H.", at: d(12) },
         { kind: "report", text: "Rapport från Maja Ek om lufttid 1,8 s. Ligger i granskningskön.", at: d(2) },
       ],
     };
