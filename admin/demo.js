@@ -10,11 +10,11 @@
 
   const rows = [
     { type: "record", key: "e/1", case_no: 1042, user_id: "u1", name: "Oskar Berg", value: "1,84 s", category: "jump", board: "Lufttid", signal: "Ny 1:a i Åre den här veckan", place: "Åre", time: today(18, 2), status: "under_review", since: ago(12) },
-    { type: "record", key: "e/2", case_no: 1041, user_id: "u2", name: "Leo Sund", value: "142,4 km/h", category: "speed", board: "Snabbast", signal: "Fuskkontrollen misstänker bil: över 120 km/h", place: "Sälen", time: today(17, 47), status: "stopped", since: ago(25) },
-    { type: "report", key: "r/media/m3", case_no: 1040, user_id: "u3", name: "Maja Ek", value: "Video", category: "rotation", board: "Mest rotation", signal: "3 rapporter: olämpligt innehåll", place: "Åre", time: today(17, 30), status: "hidden", since: ago(42) },
+    { type: "record", key: "e/2", case_no: 1041, user_id: "u2", name: "Leo Sund", value: "142,4 km/h", category: "speed", board: "Fart", signal: "Fuskkontrollen misstänker bil: över 120 km/h", place: "Sälen", time: today(17, 47), status: "stopped", since: ago(25) },
+    { type: "report", key: "r/media/m3", case_no: 1040, user_id: "u3", name: "Maja Ek", value: "Video", category: "rotation", board: "Rotation", signal: "3 rapporter: olämpligt innehåll", place: "Åre", time: today(17, 30), status: "hidden", since: ago(42) },
     { type: "report", key: "r/media/m4", case_no: 1039, user_id: "u4", name: "Ida Norén", value: "Foto", category: "jump", board: "Lufttid", signal: "Bildfiltret: möjlig nakenhet, 82 %", place: "Vemdalen", time: today(17, 5), status: "hidden", since: ago(60) },
-    { type: "record", key: "e/5", case_no: 1038, user_id: "u5", name: "Elsa Holm", value: "1080°", category: "rotation", board: "Mest rotation", signal: "PB +360° på en dag", place: "Åre", time: today(16, 51), status: "under_review", since: ago(70) },
-    { type: "record", key: "e/6", case_no: 1037, user_id: "u5", name: "Elsa Holm", value: "94,8 km/h", category: "speed", board: "Snabbast", signal: "Ny 1:a i Åre den här veckan", place: "Åre", time: today(16, 20), status: "under_review", since: ago(120) },
+    { type: "record", key: "e/5", case_no: 1038, user_id: "u5", name: "Elsa Holm", value: "1080°", category: "rotation", board: "Rotation", signal: "PB +360° på en dag", place: "Åre", time: today(16, 51), status: "under_review", since: ago(70) },
+    { type: "record", key: "e/6", case_no: 1037, user_id: "u5", name: "Elsa Holm", value: "94,8 km/h", category: "speed", board: "Fart", signal: "Ny 1:a i Åre den här veckan", place: "Åre", time: today(16, 20), status: "under_review", since: ago(120) },
     { type: "report", key: "r/avatar/u7", case_no: 1036, user_id: "u7", name: "Kalle Persson", value: "Profilbild", category: null, board: null, signal: "1 rapport: stötande bild", place: "Sälen", time: today(15, 58), status: "visible", since: ago(130) },
     { type: "record", key: "e/8", case_no: 1035, user_id: "u8", name: "Nils Åberg", value: "6,26 s", category: "jump", board: "Lufttid", signal: "Fuskkontrollen: lufttid utan höjdskillnad", place: "Hemavan", time: today(15, 12), status: "stopped", since: ago(180) },
   ];
@@ -35,7 +35,7 @@
     const shown = isReport ? { jump: "1,26 s", speed: "84,8 km/h", rotation: "540°" }[row.category] : row.value;
     const event = row.category ? {
       id: "e-" + row.case_no, case_no: row.case_no, category: row.category, board: row.board,
-      title: { jump: "Lufttid", speed: "Toppfart", rotation: "Rotation" }[row.category] + " " + shown,
+      title: { jump: "Lufttid", speed: "Fart", rotation: "Rotation" }[row.category] + " " + shown,
       value_text: shown, value: parseFloat(shown.replace(",", ".")), airtime: row.category === "jump" ? 1.8 : 1.1,
       jump_drop: 3.2, takeoff_speed_kmh: 38, lat: track[12][0], lon: track[12][1], time: row.time, created_at: row.since,
       status: isReport ? "approved" : row.status, signal: row.signal,
@@ -77,7 +77,7 @@
       ],
       moderation: { rejected: 1, reports_against: 2, reports_made: 1 },
       history: [
-        { kind: "decision", text: "Avvisad: Snabbast 131,7 km/h. Fart i liften, inte i backen. Av Henrik H.", at: d(12) },
+        { kind: "decision", text: "Avvisad: Fart 131,7 km/h. Fart i liften, inte i backen. Av Henrik H.", at: d(12) },
         { kind: "report", text: "Rapport från Maja Ek om lufttid 1,8 s. Ligger i granskningskön.", at: d(2) },
       ],
     };

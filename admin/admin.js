@@ -271,7 +271,7 @@
 
     const valueCard = e ? `
       <div class="card value-card ${e.category}">
-        <div class="label ${catClass(e.category)}">${esc(e.board === "Snabbast" ? "Toppfart" : e.board === "Mest rotation" ? "Rotation" : "Lufttid")}</div>
+        <div class="label ${catClass(e.category)}">${esc({ speed: "Fart", jump: "Lufttid", rotation: "Rotation" }[e.category] || e.board)}</div>
         <div><span class="big">${esc(e.value_text.replace(/ (s|km\/h)$/, ""))}</span><span class="big-unit ${catClass(e.category)}">${esc((e.value_text.match(/ (s|km\/h)$/) || ["", ""])[1])}</span></div>
         ${e.category === "jump" ? `<div class="est">${esc(estimate(e))}</div>` : ""}
         <div class="line">${esc([e.previous_first ? `Tidigare 1:a i ${e.resort_name}: ${e.previous_first.value_text}` : null, e.previous_pb ? `${firstName(u?.name)}s PB före detta: ${e.previous_pb}` : `Första åket i kategorin`].filter(Boolean).join(" · "))}</div>
@@ -623,7 +623,7 @@
           <button class="btn btn-outline" id="delete">Radera användare</button>
         </div>
       </div>
-      <div class="pb-grid">${pbCard("speed", "Toppfart", "km/h")}${pbCard("jump", "Lufttid", "s")}${pbCard("rotation", "Rotation", "°")}</div>
+      <div class="pb-grid">${pbCard("speed", "Fart", "km/h")}${pbCard("jump", "Lufttid", "s")}${pbCard("rotation", "Rotation", "°")}</div>
       <div class="private-note"><span class="tag private">Privat</span>Krasch-g är privat för användaren och visas inte här.</div>
       <div class="user-grid">
         <div class="table-card">
